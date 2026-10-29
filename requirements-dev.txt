@@ -1,0 +1,6 @@
+pytest-homeassistant-custom-component==0.13.348
+tinytuya==1.20.0
+ruff>=0.12,<1
+# Optional, only for tools/extract_app_profile.py:
+#   androguard==4.1.4
+#   apksigtool==0.1.0

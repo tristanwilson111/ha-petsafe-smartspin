@@ -1,0 +1,11 @@
+Derived from https://github.com/abovecolin/tuya-mobile
+Commit: 86301173cb3c9fc543841f269805438151460dad (package version 1.2.0)
+License: MIT; Copyright (c) 2026 tuya-mobile contributors. See LICENSE.
+Modifications: retain password email login, protocol models/errors, encrypted
+transport and pure Python signer only. Remove native signer, phone fallback,
+JWT login, cloud writes, device enumeration and BLE credential-pair helpers.
+Bundled profile source was NOT copied; profiles.py is a no-identities shim.
+Transport disables redirects, requires HTTP 200, and ignores environment overrides.
+Integration adds an independent action/version whitelist and login budget,
+strict explicit region pinning, private-profile validation, exact device/localKey
+validation and sanitized public errors. Runtime dependencies: aiohttp, cryptography.

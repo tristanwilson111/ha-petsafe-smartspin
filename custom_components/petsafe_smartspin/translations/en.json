@@ -1,0 +1,90 @@
+{
+  "title": "PetSafe SmartSpin",
+  "config": {
+    "step": {
+      "user": {
+        "title": "PetSafe SmartSpin (experimental, read-only)",
+        "description": "Choose local credentials, or advanced Companion bootstrap. This integration reads six sensors only.",
+        "menu_options": {
+          "local": "Local credentials",
+          "companion": "Companion bootstrap (advanced private app profile)"
+        }
+      },
+      "local": {
+        "title": "Local credentials",
+        "description": "The device must already be paired. Reads local Tuya protocol 3.5 status only. Do not reset or re-pair it.",
+        "data": {
+          "host": "Device IP address or hostname",
+          "device_id": "Device ID",
+          "local_key": "Local key (16 bytes)"
+        }
+      },
+      "companion": {
+        "title": "Companion bootstrap (advanced)",
+        "description": "Advanced: supply your own private app-profile JSON. No OEM signing profile or public API keys are included; official authentication is not available. Your password and profile are used once to retrieve a local key and are not saved in the config entry. Local status must succeed before setup completes.",
+        "data": {
+          "host": "Device IP address or hostname",
+          "device_id": "Device ID",
+          "local_key": "Local key (16 bytes)",
+          "username": "Companion account email or username",
+          "password": "Companion account password",
+          "country_code": "Country calling code",
+          "region": "Account region",
+          "app_profile": "Private app-profile JSON (advanced; no built-in authentication profile)"
+        }
+      },
+      "reconfigure": {
+        "title": "Update local connection",
+        "description": "Enter the new address and local key. The device ID cannot change. The connection is verified before saving.",
+        "data": {
+          "host": "Device IP address or hostname",
+          "local_key": "Local key (16 bytes)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to read a valid local status. Check the address, local key, LAN access and whether another local client is connected.",
+      "invalid_auth": "Companion authentication failed.",
+      "interaction_required": "Complete any account verification in the Companion app, then retry.",
+      "invalid_profile": "The private app-profile JSON is invalid or unsupported.",
+      "bootstrap_failed": "Companion bootstrap failed. No account credentials were saved.",
+      "invalid_input": "Check the address, device ID and 16-byte local key."
+    },
+    "abort": {
+      "already_configured": "This device is already configured.",
+      "reconfigure_successful": "Local connection updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Polling options",
+        "data": {
+          "poll_interval": "Polling interval (seconds, minimum 5)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status"
+      },
+      "fault": {
+        "name": "Fault bitmap"
+      },
+      "clean_control_state": {
+        "name": "Clean control state"
+      },
+      "history_record": {
+        "name": "History record"
+      },
+      "visits_today": {
+        "name": "Visits today"
+      },
+      "last_seen": {
+        "name": "Last seen"
+      }
+    }
+  }
+}

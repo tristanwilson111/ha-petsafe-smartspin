@@ -1,0 +1,27 @@
+# Local environments and build/test output
+.venv/
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+build/
+dist/
+*.egg-info/
+# Never publish credentials, account profiles, app binaries or private evidence
+.env
+.env.*
+*.private.*
+credentials.json
+devices.json
+app-profile.json
+*-app-profile.json
+*-profile-extracted.json
+*.apk
+*.xapk
+*.apks
+*.ipa
+*.bmp
+config/
