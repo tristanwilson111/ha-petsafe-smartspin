@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+- Fix local, reconfiguration, and Companion setup forms failing to render in
+  Home Assistant's HTTP API. Keep strict connection validation after submission.
+- Add regression checks using the same schema serializer as HA's flow views.
+
 ## 0.2.0
 
 - Add optional Companion cloud history: last-visit weight, duration, visit time,

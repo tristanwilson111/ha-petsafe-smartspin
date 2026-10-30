@@ -51,9 +51,9 @@ def _secret_selector() -> TextSelector:
 
 
 def _local_schema(*, reconfigure: bool = False) -> vol.Schema:
-    fields = {vol.Required(CONF_HOST): _host}
+    fields = {vol.Required(CONF_HOST): str}
     if not reconfigure:
-        fields[vol.Required(CONF_DEVICE_ID)] = _identifier
+        fields[vol.Required(CONF_DEVICE_ID)] = str
     # Validate secrets after the selector; never populate defaults from an entry.
     fields[vol.Required(CONF_LOCAL_KEY)] = _secret_selector()
     return vol.Schema(fields)
@@ -155,12 +155,10 @@ class SmartSpinConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 {
                     vol.Required(CONF_USERNAME): str,
                     vol.Required(CONF_PASSWORD): _secret_selector(),
-                    vol.Required("country_code", default="1"): vol.All(
-                        str, vol.Match(r"^[0-9]{1,4}$")
-                    ),
+                    vol.Required("country_code", default="1"): str,
                     vol.Required("region", default="us"): vol.In(REGIONS),
-                    vol.Required(CONF_HOST): _host,
-                    vol.Required(CONF_DEVICE_ID): _identifier,
+                    vol.Required(CONF_HOST): str,
+                    vol.Required(CONF_DEVICE_ID): str,
                     vol.Required("app_profile"): _secret_selector(),
                 }
             ),
@@ -282,9 +280,7 @@ class SmartSpinOptionsFlow(config_entries.OptionsFlow):
                 {
                     vol.Required(CONF_USERNAME): str,
                     vol.Required(CONF_PASSWORD): _secret_selector(),
-                    vol.Required("country_code", default="1"): vol.All(
-                        str, vol.Match(r"^[0-9]{1,4}$")
-                    ),
+                    vol.Required("country_code", default="1"): str,
                     vol.Required("region", default="us"): vol.In(REGIONS),
                     vol.Required("app_profile"): _secret_selector(),
                     vol.Required("consent_store_cloud_session", default=False): bool,
