@@ -23,10 +23,9 @@ files into public issues.
 
 ## Physical safety
 
-Do not disable or override the box's safety sensors, infer successful cleaning
-from an old `finish_clean` snapshot, or force an automatic vacuum run on restart.
-A raw fault value of zero is not a substitute for a physical safety check or a
-verified bin-full signal. Preserve manufacturer safeguards and normal operation.
+Preserve the box's manufacturer safeguards and normal operation. A cached
+`finish_clean` history value does not establish that a new cleaning cycle has
+completed. A raw fault value of zero is not a verified bin-empty reading.
 
 ## App profiles
 
