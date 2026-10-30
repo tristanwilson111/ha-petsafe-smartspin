@@ -112,10 +112,10 @@ notification.
 
 ### Some app features are missing
 
-The public integration currently provides the six local sensors listed in the
-[README](../README.md#what-youll-see). Weight, visit duration, visit history,
-bin-full detection, and device controls aren't included. Installing this version
-will not add those app features.
+The [README](../README.md#what-youll-see) lists the local sensors. Weight, duration,
+visit time, and recent visits need [optional cloud history](cloud-history.md),
+which is disabled by default. Bin-full detection and device controls are not
+included.
 
 ## Ask for help safely
 

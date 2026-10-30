@@ -14,8 +14,15 @@ files into public issues.
   this integration implements no controls.
 - HA config-entry data is stored on disk, not promised to be encrypted. Protect
   the HA configuration directory and its backups.
-- Companion bootstrap credentials and signing profiles are used in memory and
-  are not intentionally retained in the config entry or logs.
+- One-time local-key bootstrap passwords and signing profiles are used in memory
+  and are not retained in the config entry or logs.
+- Optional cloud history is a separate explicit opt-in: it retains the private
+  signing profile and authenticated session/installation data to make ongoing
+  read-only requests. It never retains the account password. These stored values
+  are secrets; HA storage and backups are not promised to be encrypted.
+- Disabling cloud history removes its credentials from the current config entry,
+  not historical backups. Recognized session expiry stops cloud requests until
+  the user renews the session through Options. No automatic password retries.
 - SDK errors are translated to fixed messages. Integration diagnostics must not
   include host, device ID, keys, account identifiers, profiles, or raw responses.
 - No live account/device tests run in CI. All test credentials are synthetic.

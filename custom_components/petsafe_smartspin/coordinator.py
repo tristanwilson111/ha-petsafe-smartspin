@@ -34,6 +34,7 @@ class SmartSpinCoordinator(DataUpdateCoordinator[Snapshot]):
             ),
         )
         self.device_id = entry.data[CONF_DEVICE_ID]
+        self.cloud_coordinator = None
         self._host = entry.data[CONF_HOST]
         self._local_key = entry.data[CONF_LOCAL_KEY]
 

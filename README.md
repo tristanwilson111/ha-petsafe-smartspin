@@ -1,10 +1,17 @@
 # PetSafe SmartSpin for Home Assistant
 
+> **AI transparency:** This project is **100% AI-created**, with functionality
+> validated by **Tristan Wilson** on his own PetSafe SmartSpin. It remains
+> experimental; this is not independent certification or vendor endorsement.
+
 See your **PetSafe ScoopFree SmartSpin** in Home Assistant while keeping it paired
 with **PetSafe Pet Companion**.
 
-This unofficial integration reads information from your litter box over your home
-network. It does not start cleaning or change the box's settings.
+**Local mode:** status and daily visits are read over your home network. The
+integration never starts cleaning or changes the box's settings.
+
+**Optional cloud history:** adds last-visit weight, visit duration, visit time,
+and recent visits using your existing Companion account.
 
 > **Before you install:** you need the box's IP address, device ID, and local key.
 > These are not your PetSafe email and password. If you don't have them, read
@@ -18,13 +25,16 @@ network. It does not start cleaning or change the box's settings.
 - Raw fault code
 - Cleaning-history value
 - Clean-control state (reported information, not a button)
-- Last successful connection check
+- Local connection checked (timestamp of a successful LAN poll)
+- With optional cloud history: **last visit weight**, **last visit duration**,
+  **last visit time**, and up to **10 recent visits** in the Last visit entity's
+  attributes, plus a diagnostic cloud-check timestamp
 
-**The connection-check timestamp updates whenever a poll succeeds. It is not the
-last visit time.** Cleaning history can also keep its previous value.
+**Connection-check timestamps are not visit times.** Cleaning history can also
+keep its previous value. Weight and duration describe a reported visit, not a
+live scale reading or automatic identification of a particular cat.
 
-The public integration does **not** currently include weight, visit duration,
-visit history, or a bin-full indicator. The daily visit count is not a bin level.
+**Bin-full detection is not included.** The daily visit count is not a bin level.
 
 ## Install
 
@@ -50,6 +60,18 @@ You do **not** need to reset the box, remove it from Companion, or change apps.
 
 Need help finding those values or fixing a connection error? See the
 [setup guide](docs/setup.md).
+
+## Optional: weight, duration, and recent visits
+
+After connecting locally, open the integration's **Configure / Options** button,
+turn on **Enable Companion cloud visit history**, and follow the sign-in form.
+You need your own [private app profile](docs/application-profile.md) as well as
+your Companion login. This is still an advanced setup, not password-only login.
+
+Cloud history uses **one shared request every five minutes**, not a login on each
+poll. It saves a sensitive cloud session and private app profile with your
+explicit consent, **never your password**. Local mode works without it.
+[Cloud setup, privacy, and session renewal](docs/cloud-history.md).
 
 ## Advanced setup
 

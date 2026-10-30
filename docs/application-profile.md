@@ -75,8 +75,12 @@ add `--expected-certificate YOUR_TRUSTED_SHA256` to the extraction command.
 4. Paste the file contents into **Application profile** and submit.
 
 Setup retrieves the key for that exact device and checks the local connection.
-The integration keeps the local connection details, **not** your account
-password or application profile. It doesn't change your Companion pairing.
+The one-time local-key bootstrap keeps only local connection details, **not**
+your password or application profile. It doesn't change Companion pairing.
+
+**Optional cloud history is a separate opt-in:** it must save the private profile
+and authenticated session for ongoing reads, with explicit consent. It still
+never saves your password. See [cloud-history setup and privacy](cloud-history.md).
 
 ## If it fails
 

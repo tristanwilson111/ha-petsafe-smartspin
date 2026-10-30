@@ -7,7 +7,7 @@ from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import config_validation as cv
 
-from .const import DOMAIN
+from .const import CONF_CLOUD_HISTORY, DOMAIN
 from .coordinator import SmartSpinCoordinator
 
 CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
@@ -20,6 +20,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: SmartSpinConfigEntry) ->
     coordinator = SmartSpinCoordinator(hass, entry)
     await coordinator.async_config_entry_first_refresh()
     entry.runtime_data = coordinator
+    if CONF_CLOUD_HISTORY in entry.data:
+        from .cloud_coordinator import CloudHistoryCoordinator
+
+        coordinator.cloud_coordinator = CloudHistoryCoordinator(hass, entry)
+        # Cloud unavailability must not prevent the local integration starting.
+        await coordinator.cloud_coordinator.async_refresh()
     entry.async_on_unload(entry.add_update_listener(async_reload_entry))
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True

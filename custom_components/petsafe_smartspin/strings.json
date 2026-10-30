@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "PetSafe SmartSpin (experimental, read-only)",
-        "description": "Choose local credentials, or advanced Companion bootstrap. This integration reads six sensors only.",
+        "description": "Connect locally first. Optional Companion cloud visit history can be enabled later in the integration options.",
         "menu_options": {
           "local": "Local credentials",
           "companion": "Companion bootstrap (advanced private app profile)"
@@ -58,11 +58,33 @@
   "options": {
     "step": {
       "init": {
-        "title": "Polling options",
+        "title": "Local polling and optional cloud history",
         "data": {
-          "poll_interval": "Polling interval (seconds, minimum 5)"
+          "poll_interval": "Polling interval (seconds, minimum 5)",
+          "cloud_history": "Enable Companion cloud visit history",
+          "renew_cloud_session": "Renew cloud session (requires sign-in again)"
+        },
+        "description": "Cloud history is optional. It uses one shared request every five minutes and requires a private app profile. Leave disabled for local-only operation."
+      },
+      "cloud": {
+        "title": "Enable Companion cloud visit history",
+        "description": "Weight, duration, and recent visits require cloud access. With your consent, Home Assistant saves the authenticated session and private application profile in its configuration and backups; these are sensitive and are not promised to be encrypted. Your account password is used once and never stored. The integration requests recent visits every five minutes; it does not log in on every poll. Re-enable or renew here when the session expires. Disabling cloud history removes its saved credentials from this entry, but not old backups.",
+        "data": {
+          "username": "Companion account email",
+          "password": "Companion account password",
+          "country_code": "Country calling code",
+          "region": "Account region",
+          "app_profile": "Private app-profile JSON",
+          "consent_store_cloud_session": "I agree to store the session and private app profile for ongoing cloud reads"
         }
       }
+    },
+    "error": {
+      "invalid_auth": "Companion sign-in failed or the session expired. Your existing setup was not replaced.",
+      "interaction_required": "Complete any verification in Companion before trying again.",
+      "invalid_profile": "The private app-profile JSON is invalid or unsupported.",
+      "cloud_consent_required": "Consent is required to store a cloud session and private app profile.",
+      "cloud_cannot_connect": "Unable to verify Companion visit history. Your existing setup was not replaced."
     }
   },
   "entity": {
@@ -83,7 +105,19 @@
         "name": "Visits today"
       },
       "last_seen": {
-        "name": "Last seen"
+        "name": "Local connection checked"
+      },
+      "last_visit_weight": {
+        "name": "Last visit weight"
+      },
+      "last_visit_duration": {
+        "name": "Last visit duration"
+      },
+      "last_visit": {
+        "name": "Last visit"
+      },
+      "cloud_last_checked": {
+        "name": "Cloud last checked"
       }
     }
   }
